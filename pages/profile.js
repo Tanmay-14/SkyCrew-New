@@ -11,7 +11,7 @@ import Website from '../public/website.svg'
 
 function profile() {
   return (
-    <div className={styles.container}>
+    <div  className={styles.container}>
         <Navbar />
 
         <div className={styles.profile_hldr}>
