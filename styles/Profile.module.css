@@ -88,7 +88,24 @@
     position: absolute;
     right: 1em;
     top: 1em;
+    cursor: pointer;
+    z-index: 100000;
 }
+
+.banner img{
+    width: 100%;
+    max-width: 710px;
+    height: 233px;
+    border-radius: 10px;
+    object-fit:cover;
+    z-index: -100000;
+}
+
+.form{
+    display: none;
+}
+
+
 
 /* Input Info */
 .input__info{

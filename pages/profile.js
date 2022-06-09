@@ -8,8 +8,39 @@ import LinkedIn from '../public/Linkedin.svg'
 import Dribble from '../public/Dribble.svg'
 import Behance from '../public/Behance.svg'
 import Website from '../public/website.svg'
+import { useState, useRef } from 'react';
 
 function profile() {
+    const [imageSrc, setImageSrc] = useState();
+
+    /**
+     * handleOnChange
+     * @description Triggers when the file input changes (ex: when a file is selected)
+     */
+
+    function handleOnChange(changeEvent) {
+        const reader = new FileReader();
+
+        reader.onload = function(onLoadEvent) {
+        setImageSrc(onLoadEvent.target.result);
+        // setUploadData(undefined);
+        }
+
+        reader.readAsDataURL(changeEvent.target.files[0]);
+    }
+
+    const inputFileRef = useRef( null );
+
+    const onFileChangeCapture = ( e ) => {
+    /*Selected files data can be collected here.*/
+    console.log( e.target.files );
+    }
+    const onIconClick = () => {
+    /*Collecting node-element and performing click*/
+    inputFileRef.current.click();
+    }
+  
+
   return (
     <div  className={styles.container}>
         <Navbar />
@@ -22,14 +53,19 @@ function profile() {
                     <p>You control your profile and can limit what is shown on search engines</p>
 
                     <div className={styles.banner}>
-                            <div className={styles.edit__icon}>
-                                <Image 
+                        
+                        <form className={styles.form} method="post" onChange={handleOnChange}>
+                            <input type="file" className={styles.banner_img}  id="ban_img" ref={inputFileRef} onChangeCapture={onFileChangeCapture} accept='image/png image/jpg'/> 
+                        </form>
+                        <div className={styles.edit__icon} onClick={onIconClick}>
+                                { <Image 
                                     src={Edit}
                                     alt="Player Image"
                                     width={50}
                                     height={50}
-                                />
-                            </div>
+                                />}
+                        </div>
+                        <img src={imageSrc}  />
                     </div>
 
                     <div className={styles.input__info}>
